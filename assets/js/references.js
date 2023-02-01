@@ -109,6 +109,15 @@ references = {
       [26, 0, 26*3 - 3],
     ]
   },
+  "belorousski" : {
+    "author" : "Belorousski, Pavel",
+    "title" : "Chow rings of moduli spaces of pointed elliptic curves",
+    "year" : 1998,
+
+    "dimensions" : [
+      [1, 10, -1]
+    ]
+  },
   "MR1785575" : {
     "author" : "Farkas, Gavril",
     "year" : 2000,
@@ -327,6 +336,7 @@ references = {
     "year" : 2021,
 
     "dimensions" : [
+      // Theorems 1.1, 1.2 and 1.3
       [12, 7, -1],
       [12, 8, "<=39"],
       [12, 11, 3*12 - 3 + 11],
@@ -338,6 +348,8 @@ references = {
       [15, 10, 3*15 - 3 + 10],
       [16, 0, "<=43"],
       [16, 9, 3*16 - 3 + 9],
+      // Proposition 1.4
+      [2, 13, -1]
     ],
   },
   "2005.00622" : {
@@ -367,6 +379,16 @@ references = {
     "dimensions" : [
       [13, 9, 3*13 - 3 + 9]
     ]
+  },
+  "2106.13774" : {
+    "author" : "Barros, Ignacio and Mullane, Scott",
+    "title" : "The Kodaira classification of the moduli of hyperelliptic curves",
+    "year" : 2021,
+
+    "dimensions" : [
+      [2, 14, 11],
+      [2, 15, 2*3 - 3 + 15]
+    ],
   },
 };
 
