@@ -33,15 +33,17 @@ window.MathJax = {
 
 <script>
 // determines the size of the table
+const G_MIN = 1;
 const G_MAX = 26;
+const N_MIN = 0;
 const N_MAX = 16;
 
 // dict we will populate with the data from the references
 var dimensions = {};
-for (var g = 2; g <= G_MAX; g++) {
+for (var g = G_MIN; g <= G_MAX; g++) {
   dimensions[g] = {};
 
-  for (var n = 0; n <= N_MAX; n++)
+  for (var n = N_MIN; n <= N_MAX; n++)
     dimensions[g][n] = {
       // initialise to the full list of possible dimensions
       "kappa" : Array.from({length: 3*g - 3 + n + 2}, (x, i) => i - 1),
@@ -97,16 +99,16 @@ $(function() {
 
   // header row
   var row = $("<tr><td>ₙ\\ᵍ</td></tr>");
-  for (g = 2; g <= G_MAX; g++)
+  for (g = G_MIN; g <= G_MAX; g++)
     row.append($("<th>" + g + "</th>"));
   table.append(row);
 
   // main body of the table
-  for (var n = 0; n <= N_MAX; n++) {
+  for (var n = N_MIN; n <= N_MAX; n++) {
     row = $("<tr></tr>");
     row.append($("<th>" + n + "</th>"));
 
-    for (var g = 2; g <= G_MAX; g++) {
+    for (var g = G_MIN; g <= G_MAX; g++) {
       var cell = $("<td>●</td>")
         .addClass("cell")
         .data("g", g)
@@ -117,7 +119,7 @@ $(function() {
         cell.addClass("negative");
       else if (dimensions[g][n].kappa == 3*g - 3 + n)
         cell.addClass("general");
-      else if (0 < dimensions[g][n].kappa && dimensions[g][n].kappa < 3*g - 3 + n)
+      else if (0 <= dimensions[g][n].kappa && dimensions[g][n].kappa < 3*g - 3 + n)
         cell.addClass("intermediate");
       else if (dimensions[g][n].kappa.length < 3*g - 3 + n + 2)
         cell.addClass("range");
@@ -169,7 +171,7 @@ $(function() {
           else if (dimensions[g][n].kappa == 3*g - 3 + n)
             $("span#dimension").html(dimensions[g][n].kappa + ", so it is of general type");
           else
-            $("span#dimension").html(dimensions[g][n].kappa + ", and the dimension is " + 3*g - 3 + n);
+            $("span#dimension").html(dimensions[g][n].kappa + ", and the dimension is " + (3*g - 3 + n));
 
           // show the references for this specific result only
           $("ul#references li").hide();
@@ -250,6 +252,7 @@ $(function() {
 
 <h3>About</h3>
 <p>This is an interactive version of a <a href="https://sites.google.com/view/ibarros/state-of-art-mgn">static table</a> made by the first author.
+It is meant to be feature-complete, rather it is a teaser for more to come.
 <ul>
   <li><a href="https://sites.google.com/view/ibarros/home">Ignacio Barros</a>
   <li><a href="https://pbelmans.ncag.info">Pieter Belmans</a>
