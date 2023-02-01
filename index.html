@@ -193,6 +193,7 @@ $(function() {
   for (key in references) {
     var reference = references[key];
 
+    // ugly string builder for references
     var entry = "";
     entry += reference.author;
     entry += ", <em>" + reference.title + "</em>";
@@ -201,6 +202,14 @@ $(function() {
       entry += ", " + reference.journal;
     if ("pages" in reference)
       entry += ", " + reference.pages[0] + "–" + reference.pages[1];
+
+    // MathScinet link from key
+    if (key.startsWith("MR"))
+      entry += " [<a href='https://mathscinet.ams.org/mathscinet-getitem?mr=" + key + "'>" + key + "</a>]";
+    // arXiv link from key
+    const arxiv = new RegExp('^\\d{4}');
+    if (arxiv.test(key))
+      entry += "[<a href='https://arxiv.org/abs/" + key + "'>" + key + "</a>]";
 
     var item = $("<li data-key='" + key + "'>" + entry + "</li>")
 
