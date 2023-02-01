@@ -7,7 +7,6 @@ references = {
     "number" : 24,
     "pages" : [877, 888],
 
-    // TODO list comprehension
     "dimensions": [
       [2, 0, -1],
       [3, 0, -1],
@@ -17,10 +16,85 @@ references = {
       [7, 0, -1],
       [8, 0, -1],
       [9, 0, -1],
-      [10, 0, -1], // I guess based on the Mumford--Harris MathSciNet review
+      [10, 0, -1],
     ]
   },
-  "MR910206": {
+  "MR0534063" : {
+    "author" : "Arbarello, Enrico and Sernesi, Edoardo",
+    "year" : 1979,
+    "title" : "The equation of a plane curve",
+    "journal" : "Duke Math. J.",
+    "volume" : 46,
+    "number" : 2,
+
+    "dimensions" : [
+      [2, 0, -1],
+      [3, 0, -1],
+      [4, 0, -1],
+      [5, 0, -1],
+      [6, 0, -1],
+      [7, 0, -1],
+      [8, 0, -1],
+      [9, 0, -1],
+      [10, 0, -1],
+    ]
+  },
+  "MR0634856" : {
+    "author" : "Edoardo, Sernesi",
+    "year" : 1981,
+    "title" : "Unirationality of the variety of moduli of curves of genus twelve",
+    "journal" : "Ann. Scuola Norm. Sup. Pisa Cl. Sci.",
+    "volume" : 4,
+    "number" : 8,
+    "pages" : [405, 439],
+
+    "dimensions" : [
+      [12, 0, -1]
+    ]
+  },
+  "MR0664324" : {
+    "author" : "Harris, Joe and Mumford, David",
+    "year" : 1982,
+    "title" : "On the Kodaira dimension of the moduli space of curves",
+    "journal" : "Invent. Math.",
+    "volume" : 67,
+    "number" : 2,
+    "pages" : [23, 88],
+
+    "dimensions" : [
+      [23, 0, ">=0"],
+      [25, 0, 25*3 - 3],
+    ]
+  },
+  "MR0739623" : {
+    "author" : "Chang, Mei-Chu and Ran, Ziv",
+    "year" : 1984,
+    "title" : "Unirationality of the moduli spaces of curves of genus 11, 13 (and 12)",
+    "journal" : "Invent. Math.",
+    "volume" : 76,
+    "number" : 1,
+    "pages" : [41, 54],
+
+    "dimensions" : [
+      [11, 0, -1],
+      [12, 0, -1],
+      [13, 0, -1]
+    ]
+  },
+  "MR0862048" : {
+    "author" : "Chang, Mei-Chu and Ran, Ziv",
+    "title" : "The Kodaira dimension of the moduli space of curves of genus 15",
+    "year" : 1985,
+    "journal" : "J. Differential Geom.",
+    "volume" : 24,
+    "number" : 2,
+    "pages" : [205, 220],
+
+    "dimensions" : [
+      [15, 0, -1]
+    ]
+  },
+  "MR0910206": {
     "author" : "Eisenbud, David and Harris, Joe",
     "year" : 1987,
     "title" : "The Kodaira dimension of the moduli space of curves of genus $\\geq 23$",
@@ -28,11 +102,23 @@ references = {
     "number" : 2,
     "pages" : [359, 387],
 
-    // TODO list comprehension
     "dimensions": [
+      [23, 0, ">=1"],
       [24, 0, 24*3 - 3],
       [25, 0, 25*3 - 3],
       [26, 0, 26*3 - 3],
+    ]
+  },
+  "MR1785575" : {
+    "author" : "Farkas, Gavril",
+    "year" : 2000,
+    "title" : "The geometry of the moduli space of curves of genus 23",
+    "journal" : "Math. Ann.",
+    "volume" : 318,
+    "number" : 1,
+
+    "dimensions" : [
+      [23, 0, ">=2"]
     ]
   },
   "MR1953519": {
@@ -120,6 +206,25 @@ references = {
       [16, 0, "<=43"],
       [16, 9, 3*16 - 3 + 9],
     ],
+  },
+  "2005.00622" : {
+    "author" : "Farkas, Gavril and Jensen, David and Payne, Sam",
+    "title" : "The Kodaira dimensions of $\\overline{\\mathcal{M}}_{22}$ and $\\overline{\\mathcal{M}}_{23}$",
+    "year" : 2020,
+
+    "dimensions" : [
+      [22, 0, 22*3 - 3],
+      [23, 0, 23*3 - 3]
+    ]
+  },
+  "2008.08852" : {
+    "author" : "Farkas, Gavril and Verra, Alessandro",
+    "title" : "On the Kodaira dimension of the moduli space of curves of genus 16",
+    "year" : 2020,
+
+    "dimensions" : [
+      [16, 0, "<=44"]
+    ]
   }
 };
 

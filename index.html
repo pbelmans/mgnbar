@@ -173,7 +173,7 @@ $(function() {
           $("ul#references li").hide();
           // if there are results we make these visible again
           if (keys.length > 0)
-            for (const key of keys) $("li[data-key~=" + key + "]").show();
+            for (const key of keys) $("li[data-key~='" + key + "']").show();
           else
             $("ul#references").append($("<p id='none'>no references available</p>"));
 
