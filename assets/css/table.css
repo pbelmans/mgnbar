@@ -11,6 +11,11 @@ table#mgnbar th {
 td.cell {
   border: 1px solid black;
   color: transparent;
+  cursor: pointer;
+}
+
+td.cell:hover {
+  opacity: 0.5;
 }
 
 .negative {
