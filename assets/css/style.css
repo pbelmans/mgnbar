@@ -1,0 +1,52 @@
+div#content {
+  margin: 0 auto;
+  padding: 1rem .5rem;
+  overflow-x: scroll;
+  font-size: 15px;
+}
+
+nav#menu {
+  font-size: 14px;
+}
+
+nav#menu a {
+  color: #81c3fc;
+}
+
+nav#menu a:hover {
+  color: #d9edf7;
+  text-decoration: none;
+}
+
+div#title {
+  background-color: #eee;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  z-index: 3;
+}
+
+div#title h1 {
+  font-family: "Poppins", Georgia, serif;
+  font-size: 2.4rem;
+  padding-top: .3rem;
+}
+
+div#title h1 a {
+  display: block;
+}
+
+div#title h1 a,
+div#title h1 a:hover {
+  color: black;
+}
+
+div#title h1 a:hover {
+  text-decoration: underline;
+  text-decoration-color: #035096;
+}
+
+div#title p#slogan {
+  font-style: italic;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}

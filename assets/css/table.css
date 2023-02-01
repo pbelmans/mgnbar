@@ -8,10 +8,19 @@ table#mgnbar th {
   text-align: center;
 }
 
+table#mgnbar td {
+  font-size: 60%;
+}
+
+table#mgnbar th {
+  font-size: 80%;
+}
+
 td.cell {
   border: 1px solid black;
   color: transparent;
   cursor: pointer;
+  padding: 0;
 }
 
 td.cell:hover {
