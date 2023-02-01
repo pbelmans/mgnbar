@@ -132,6 +132,8 @@ $(function() {
         if ($(this).hasClass("active")) {
           // show all references
           $("ul#references li").show();
+          // clear specifier
+          $("span#specifier").html("");
 
           // make it inactive
           $(this).removeClass("active");
