@@ -358,7 +358,16 @@ references = {
     "dimensions" : [
       [16, 0, "<=44"]
     ]
-  }
+  },
+  "2110.09553" : {
+    "author" : "Farkas, Gavril and Jensen, Dave and Payne, Sam",
+    "title" : "The non-abelian Brill-Noether divisor on $\\overline{\\mathcal{M}}_{13}$ and the Kodaira dimension of $\\overline{\\mathcal{R}}_{13}$",
+    "year" : 2021,
+
+    "dimensions" : [
+      [13, 9, 3*13 - 3 + 9]
+    ]
+  },
 };
 
 
