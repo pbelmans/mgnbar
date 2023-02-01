@@ -130,6 +130,10 @@ $(function() {
 
         // if active then we return to the initial state
         if ($(this).hasClass("active")) {
+          // show all references
+          $("ul#references li").show();
+
+          // make it inactive
           $(this).removeClass("active");
         }
         // if not active we change the view to have only the specific data for this (g,n)
@@ -147,6 +151,7 @@ $(function() {
           $("span#moduli").html("M<sub>" + g + "," + n + "</sub>");
 
           // deal with the different scenarios for the Kodaira dimension
+          // if it is a range we have certain bounds
           if (Array.isArray(dimensions[g][n].kappa)) {
             // standing assumption: range is always continuous
             // so figure out upper and lower bound
@@ -164,11 +169,11 @@ $(function() {
           else
             $("span#dimension").html(dimensions[g][n].kappa + ", and the dimension is " + 3*g - 3 + n);
 
-          // show the references
+          // show the references for this specific result only
           $("ul#references li").hide();
+          // if there are results we make these visible again
           if (keys.length > 0)
-            $("li[data-key~=" + keys + "]").show();
-            // TODO this doesn't work with multiple keys, because the attribute selector makes no sense then
+            for (const key of keys) $("li[data-key~=" + key + "]").show();
           else
             $("ul#references").append($("<p id='none'>no references available</p>"));
 
@@ -191,9 +196,12 @@ $(function() {
     var entry = "";
     entry += reference.author;
     entry += ", <em>" + reference.title + "</em>";
-    // TODO more string building
+    entry += " (<strong>" + reference.year + "</strong>)";
+    if ("journal" in reference)
+      entry += ", " + reference.journal;
+    if ("pages" in reference)
+      entry += ", " + reference.pages[0] + "–" + reference.pages[1];
 
-    // TODO why doesn't .data("key", key) work?
     var item = $("<li data-key='" + key + "'>" + entry + "</li>")
 
     list.append(item);
