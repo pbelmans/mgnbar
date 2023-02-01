@@ -1,0 +1,41 @@
+table#mgnbar {
+}
+
+table#mgnbar td,
+table#mgnbar th {
+  width: 40px;
+  height: 20px;
+  text-align: center;
+}
+
+td.cell {
+  border: 1px solid black;
+  color: transparent;
+}
+
+.negative {
+  background-color: #007bff;
+}
+
+.general {
+  background-color: #dc3545;
+}
+
+.intermediate {
+  background-color: #ffc107;
+}
+
+.range {
+  background-color: gray;
+}
+
+td.cell.active {
+  color: black;
+}
+
+div#legend span {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border: 1px solid black;
+}
