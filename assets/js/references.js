@@ -206,13 +206,17 @@ references = {
     "year" : 2006,
 
     "dimensions" : [
-      // Theorem 3
+      // Theorem 3: this should really be automated somehow, because it is intermediate for all n\geq 11
       [1, 11, 0],
       [1, 12, 1],
       [1, 13, 1],
       [1, 14, 1],
       [1, 15, 1],
       [1, 16, 1],
+      [1, 17, 1],
+      [1, 18, 1],
+      [1, 19, 1],
+      [1, 20, 1],
     ]
   },
   "MR2352722" : {
