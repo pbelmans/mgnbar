@@ -401,6 +401,20 @@ references = {
       [2, 15, 2*3 - 3 + 15]
     ],
   },
+  "2506.23812" : {
+    "author" : "de Preter, Ruben",
+    "title" : "The Kodaira classification of the moduli space of pointed curves in genus 3",
+    "year" : 2025,
+
+    "dimensions" : [
+      [3, 15, 3*3 - 3 + 15],
+      [3, 16, 3*3 - 3 + 16],
+      [3, 17, 3*3 - 3 + 17],
+      [3, 18, 3*3 - 3 + 18],
+      [3, 19, 3*3 - 3 + 19],
+      [3, 20, 3*3 - 3 + 20],
+    ],
+  },
 };
 
 
