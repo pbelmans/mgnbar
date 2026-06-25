@@ -363,10 +363,14 @@ references = {
       [2, 13, -1]
     ],
   },
-  "2005.00622" : {
+  "MR4933236" : {
     "author" : "Farkas, Gavril and Jensen, David and Payne, Sam",
     "title" : "The Kodaira dimensions of $\\overline{\\mathcal{M}}_{22}$ and $\\overline{\\mathcal{M}}_{23}$",
-    "year" : 2020,
+    "journal" : "Camb. J. Math.",
+    "volume" : 13,
+    "number" : 3,
+    "year" : 2025,
+    "pages" : [431, 607],
 
     "dimensions" : [
       [22, 0, 22*3 - 3],
@@ -382,19 +386,27 @@ references = {
       [16, 0, "<=44"]
     ]
   },
-  "2110.09553" : {
-    "author" : "Farkas, Gavril and Jensen, Dave and Payne, Sam",
+  "MR4718128" : {
+    "author" : "Farkas, Gavril and Jensen, David and Payne, Sam",
     "title" : "The non-abelian Brill-Noether divisor on $\\overline{\\mathcal{M}}_{13}$ and the Kodaira dimension of $\\overline{\\mathcal{R}}_{13}$",
-    "year" : 2021,
+    "journal" : "Geom. Topol.",
+    "volume" : 28,
+    "number" : 2,
+    "year" : 2024,
+    "pages" : [803, 866],
 
     "dimensions" : [
       [13, 9, 3*13 - 3 + 9]
     ]
   },
-  "2106.13774" : {
+  "MR4940396" : {
     "author" : "Barros, Ignacio and Mullane, Scott",
     "title" : "The Kodaira classification of the moduli of hyperelliptic curves",
-    "year" : 2021,
+    "journal" : "J. Algebraic Geom.",
+    "volume" : 34,
+    "number" : 4,
+    "year" : 2025,
+    "pages" : [685, 753],
 
     "dimensions" : [
       [2, 14, 11],
