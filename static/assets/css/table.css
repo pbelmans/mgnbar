@@ -61,7 +61,7 @@ td.cell.active {
   color: black;
 }
 
-div#legend span {
+div#legend span.swatch {
   display: inline-block;
   height: 15px;
   width: 15px;

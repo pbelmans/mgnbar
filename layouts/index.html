@@ -233,7 +233,7 @@ function renderReferences(prop) {
 function renderLegend(prop) {
   var legend = $("div#legend").empty();
   prop.legend.forEach(function(r) {
-    legend.append($("<p class='m-0'><span class='" + r.cls + "'></span> " + r.text + "</p>"));
+    legend.append($("<p class='m-0'><span class='swatch " + r.cls + "'></span> " + r.text + "</p>"));
   });
 }
 
