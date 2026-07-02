@@ -26,6 +26,7 @@ td.cell {
   color: transparent;
   cursor: pointer;
   padding: 0;
+  position: relative;
 }
 
 td.cell:hover {
@@ -41,13 +42,17 @@ td.cell:hover {
 .unirat { background-color: #08519c; }
 .unirul { background-color: #2171b5; }
 
-/* the rationality tiers carry a short white label inside the cell */
-td.cell.rat,
-td.cell.unirat,
-td.cell.unirul {
+/* the rationality label sits behind the ● marker, filling the cell */
+td.cell .rlbl {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   font-size: 55%;
   letter-spacing: -0.2px;
+  pointer-events: none;
 }
 
 .general {

@@ -339,7 +339,9 @@ function renderTable(prop) {
     row.append($("<th>" + n + "</th>"));
     for (var g = G_MIN; g <= G_MAX; g++) {
       var c = prop.classify(g, n);
-      var cell = $("<td>" + (c.label || "●") + "</td>").addClass("cell").data("g", g).data("n", n);
+      // the ● stays as the (click) marker; a rationality label sits behind it
+      var inner = c.label ? "<span class='rlbl'>" + c.label + "</span>●" : "●";
+      var cell = $("<td>" + inner + "</td>").addClass("cell").data("g", g).data("n", n);
       if (c.cls) cell.addClass(c.cls);
       cell.on("click", cellClick(prop));
       row.append(cell);
