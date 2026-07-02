@@ -2,3 +2,7 @@ baseURL = "https://mgnbar.info/"
 title = "the geometry of M_{g,n}"
 disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
 enableGitInfo = false
+
+[markup.highlight]
+# plain, light code blocks (no dark syntax-highlight theme)
+codeFences = false

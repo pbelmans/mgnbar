@@ -1,8 +1,14 @@
 div#content {
   margin: 0 auto;
   padding: 1rem .5rem;
-  overflow-x: scroll;
   font-size: 15px;
+}
+
+div#content pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
 }
 
 nav#menu {
