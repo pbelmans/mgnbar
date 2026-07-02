@@ -97,6 +97,7 @@ for (key in references) {
 <script>
 // helpers for typesetting the moduli space in labels (no MathJax needed)
 var MBAR = "<span class=\"ovl\">M</span>";      // M with a clean overline
+var FQ = "𝔽<sub><i>q</i></sub>";               // finite field with q elements
 function Mopen(g, n) { return "M<sub>" + g + "," + n + "</sub>"; }
 function Mbar(g, n)  { return MBAR + "<sub>" + g + "," + n + "</sub>"; }
 
@@ -213,7 +214,7 @@ var tautologicalProp = {
 // whether point counts over finite fields are polynomial in q; the two charts
 // from Section 5 of Larson's survey, arXiv:2606.29656, merged into one overview.
 // Each cell value is "<Mbar><M>" with statuses p (polynomial), n (not), u (unknown).
-var pointcountPhrase = { p: "polynomial in q", n: "not polynomial in q", u: "not known" };
+var pointcountPhrase = { p: "polynomial in <i>q</i>", n: "not polynomial in <i>q</i>", u: "not known" };
 var pointcountReferences = {
   "2206.07759": { author: "Bergström, Jonas and Faber, Carel and Payne, Sam", title: "Polynomial point counts and odd cohomology vanishing on moduli spaces of stable curves", year: 2022 },
   "2410.19913": { author: "Canning, Samir and Larson, Hannah and Payne, Sam and Willwacher, Thomas", title: "Moduli spaces of curves with polynomial point counts", year: 2024 },
@@ -238,8 +239,8 @@ var pointcountProp = {
     else if (b === "p")         cls = "pc-cpt";
     else if (m === "p")         cls = "pc-open";
     else                        cls = "pc-neither";
-    var info = "#" + Mbar(g, n) + "(F<sub>q</sub>) is " + pointcountPhrase[b]
-             + "; #" + Mopen(g, n) + "(F<sub>q</sub>) is " + pointcountPhrase[m];
+    var info = "#" + Mbar(g, n) + "(" + FQ + ") is " + pointcountPhrase[b]
+             + "; #" + Mopen(g, n) + "(" + FQ + ") is " + pointcountPhrase[m];
     return { cls: cls, info: info, refs: ["2410.19913", "2606.29656"] };
   }
 };
