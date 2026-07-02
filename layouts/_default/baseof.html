@@ -156,28 +156,28 @@ var larsonSurvey = {
   year: 2026
 };
 var tautologicalReferences = {
-  "mumford":      { author: "Mumford, David", title: "Towards an enumerative geometry of the moduli space of curves", year: 1983, journal: "Arithmetic and geometry, Vol. II, Progr. Math. 36, Birkhäuser" },
+  "MR0717614":    { author: "Mumford, David", title: "Towards an enumerative geometry of the moduli space of curves", year: 1983, journal: "Arithmetic and geometry, Vol. II, Progr. Math. 36, Birkhäuser" },
   "faber-thesis": { author: "Faber, Carel", title: "Chow rings of moduli spaces of curves", year: 1988, journal: "Ph.D. thesis, Universiteit van Amsterdam" },
-  "faber-m3":     { author: "Faber, Carel", title: "Chow rings of moduli spaces of curves I: the Chow ring of $\\overline{\\mathcal{M}}_3$", year: 1990, journal: "Ann. of Math. (2) 132, no. 2, 331–419" },
-  "faber-m4":     { author: "Faber, Carel", title: "Chow rings of moduli spaces of curves II: some results on the Chow ring of $\\overline{\\mathcal{M}}_4$", year: 1990, journal: "Ann. of Math. (2) 132, no. 3, 421–449" },
+  "MR1070600":    { author: "Faber, Carel", title: "Chow rings of moduli spaces of curves I: the Chow ring of $\\overline{\\mathcal{M}}_3$", year: 1990, journal: "Ann. of Math. (2) 132, no. 2, 331–419" },
+  "MR1078265":    { author: "Faber, Carel", title: "Chow rings of moduli spaces of curves II: some results on the Chow ring of $\\overline{\\mathcal{M}}_4$", year: 1990, journal: "Ann. of Math. (2) 132, no. 3, 421–449" },
   "MR1363060":    { author: "Izadi, Elham", title: "The Chow ring of the moduli space of curves of genus 5", year: 1995, journal: "The moduli space of curves, Progr. Math. 129, 267–304" },
-  "penev-vakil":  { author: "Penev, Nikola and Vakil, Ravi", title: "The Chow ring of the moduli space of curves of genus six", year: 2015, journal: "Algebr. Geom. 2, no. 1, 123–136" },
+  "MR3322200":    { author: "Penev, Nikola and Vakil, Ravi", title: "The Chow ring of the moduli space of curves of genus six", year: 2015, journal: "Algebr. Geom. 2, no. 1, 123–136" },
   "belorousski":  { author: "Belorousski, Pavel", title: "Chow rings of moduli spaces of pointed elliptic curves", year: 1998, journal: "Ph.D. thesis, University of Chicago" },
-  "graber-vakil": { author: "Graber, Tom and Vakil, Ravi", title: "On the tautological ring of $\\overline{\\mathcal{M}}_{g,n}$", year: 2001, journal: "Turkish J. Math. 25, no. 1, 237–243" },
-  "vanzelm":      { author: "van Zelm, Jason", title: "Nontautological bielliptic cycles", year: 2018, journal: "Pacific J. Math. 294, no. 2, 495–504" },
-  "2208.02357":   { author: "Canning, Samir and Larson, Hannah", title: "On the Chow and cohomology rings of moduli spaces of stable curves", year: 2022, journal: "to appear in J. Eur. Math. Soc." },
-  "2104.05820":   { author: "Canning, Samir and Larson, Hannah", title: "The Chow rings of the moduli spaces of curves of genus 7, 8 and 9", year: 2024, journal: "J. Algebraic Geom. 33, no. 1, 55–116" },
-  "ste":          { author: "Canning, Samir and Larson, Hannah and Payne, Sam", title: "Extensions of tautological rings and motivic structures in the cohomology of $\\overline{\\mathcal{M}}_{g,n}$", year: 2024, journal: "Forum Math. Pi 12, e23" },
+  "MR1829089":    { author: "Graber, Tom and Vakil, Ravi", title: "On the tautological ring of $\\overline{\\mathcal{M}}_{g,n}$", year: 2001, journal: "Turkish J. Math. 25, no. 1, 237–243" },
+  "MR3770123":    { author: "van Zelm, Jason", title: "Nontautological bielliptic cycles", year: 2018, journal: "Pacific J. Math. 294, no. 2, 495–504" },
+  "MR5083265":    { author: "Canning, Samir and Larson, Hannah", title: "On the Chow and cohomology rings of moduli spaces of stable curves", year: 2026, journal: "J. Eur. Math. Soc. 28, no. 9, 3869–3918" },
+  "MR4693574":    { author: "Canning, Samir and Larson, Hannah", title: "The Chow rings of the moduli spaces of curves of genus 7, 8 and 9", year: 2024, journal: "J. Algebraic Geom. 33, no. 1, 55–116" },
+  "MR4827752":    { author: "Canning, Samir and Larson, Hannah and Payne, Sam", title: "Extensions of tautological rings and motivic structures in the cohomology of $\\overline{\\mathcal{M}}_{g,n}$", year: 2024, journal: "Forum Math. Pi 12, e23" },
   "2509.02950":   { author: "Liu, Yuhan", title: "On the Chow rings of the moduli spaces $\\mathcal{M}_{5,8}$ and $\\mathcal{M}_{5,9}$", year: 2025 },
   "2606.29656":   larsonSurvey
 };
 // per-cell attribution of the "tautological holds" results (Section 3.3);
-// everything else in genus 2–9 is due to arXiv:2208.02357
+// everything else in genus 2 through 9 is due to MR5083265
 var tautExceptions = {
-  "2,0": "mumford", "2,1": "faber-thesis", "3,0": "faber-m3", "4,0": "faber-m4",
-  "5,0": "MR1363060", "5,8": "2509.02950", "5,9": "2509.02950", "6,0": "penev-vakil",
-  "7,0": "2104.05820", "8,0": "2104.05820", "9,0": "2104.05820",
-  "7,1": "ste", "7,2": "ste", "7,3": "ste"
+  "2,0": "MR0717614", "2,1": "faber-thesis", "3,0": "MR1070600", "4,0": "MR1078265",
+  "5,0": "MR1363060", "5,8": "2509.02950", "5,9": "2509.02950", "6,0": "MR3322200",
+  "7,0": "MR4693574", "8,0": "MR4693574", "9,0": "MR4693574",
+  "7,1": "MR4827752", "7,2": "MR4827752", "7,3": "MR4827752"
 };
 var tautologicalInfo = {
   both:        function(g, n) { return "A*(" + Mbar(g, n) + ") is tautological (hence so is A*(" + Mopen(g, n) + "))"; },
@@ -203,9 +203,9 @@ var tautologicalProp = {
     if (!s) return { cls: "", info: "", refs: [] };
     var k = g + "," + n, refs = [];
     if (s === "both" || s === "open" || s === "opencptfail")   // tautological holds
-      refs.push(tautExceptions[k] || (g === 1 ? "belorousski" : "2208.02357"));
+      refs.push(tautExceptions[k] || (g === 1 ? "belorousski" : "MR5083265"));
     if (s === "openfail" || s === "cptfail" || s === "opencptfail")   // fails
-      refs.push(g === 1 ? "graber-vakil" : "vanzelm");
+      refs.push(g === 1 ? "MR1829089" : "MR3770123");
     refs.push("2606.29656");   // the survey, which compiles the chart
     return { cls: "taut-" + s, info: tautologicalInfo[s](g, n), refs: refs };
   }
@@ -216,7 +216,7 @@ var tautologicalProp = {
 // Each cell value is "<Mbar><M>" with statuses p (polynomial), n (not), u (unknown).
 var pointcountPhrase = { p: "polynomial in <i>q</i>", n: "not polynomial in <i>q</i>", u: "not known" };
 var pointcountReferences = {
-  "2206.07759": { author: "Bergström, Jonas and Faber, Carel and Payne, Sam", title: "Polynomial point counts and odd cohomology vanishing on moduli spaces of stable curves", year: 2022 },
+  "MR4740541":  { author: "Bergström, Jonas and Faber, Carel and Payne, Sam", title: "Polynomial point counts and odd cohomology vanishing on moduli spaces of stable curves", year: 2024, journal: "Ann. of Math. (2) 199, no. 3" },
   "2410.19913": { author: "Canning, Samir and Larson, Hannah and Payne, Sam and Willwacher, Thomas", title: "Moduli spaces of curves with polynomial point counts", year: 2024 },
   "2606.29656": larsonSurvey
 };
