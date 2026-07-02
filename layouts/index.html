@@ -28,6 +28,7 @@ window.MathJax = {
 
   <script type="text/javascript" src="/assets/js/references.js"></script>
   <script type="text/javascript" src="/assets/js/tautological.js"></script>
+  <script type="text/javascript" src="/assets/js/pointcount.js"></script>
 
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/css/table.css" rel="stylesheet">
@@ -178,9 +179,38 @@ var tautologicalProp = {
   }
 };
 
+// whether point counts over finite fields are polynomial in q; the two charts
+// from Section 5 of Larson's survey, arXiv:2606.29656, shown as two layers.
+function pointcountLayer(label, space, data) {
+  var name = "#" + space + "<sub>g,n</sub>(F<sub>q</sub>)";
+  return {
+    label: label,
+    references: tautologicalReferences,
+    legend: [
+      { cls: "pc-poly",    text: name + " polynomial in q" },
+      { cls: "pc-notpoly", text: name + " not polynomial in q" },
+      { cls: "",           text: "nothing known" }
+    ],
+    classify: function(g, n) {
+      var s = data[g + "," + n];
+      if (!s) return { cls: "", info: "", refs: [] };
+      var count = "#" + (space === "M" ? Mopen(g, n) : Mbar(g, n)) + "(F<sub>q</sub>)";
+      var info = count + " is " + (s === "poly" ? "" : "not ") + "a polynomial in q";
+      return { cls: "pc-" + s, info: info, refs: ["2606.29656"] };
+    }
+  };
+}
+var pcMbarProp = pointcountLayer("Point count of " + MBAR, MBAR, pointcountMbar);
+var pcMProp    = pointcountLayer("Point count of M", "M", pointcountM);
+
 // registry of available properties; propertyOrder fixes the button order
-var properties = { kodaira: kodaira, tautological: tautologicalProp };
-var propertyOrder = ["kodaira", "tautological"];
+var properties = {
+  kodaira: kodaira,
+  tautological: tautologicalProp,
+  pointcountMbar: pcMbarProp,
+  pointcountM: pcMProp
+};
+var propertyOrder = ["kodaira", "tautological", "pointcountMbar", "pointcountM"];
 var current = null;
 
 function renderReferences(prop) {

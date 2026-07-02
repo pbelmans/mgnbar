@@ -43,15 +43,19 @@ td.cell:hover {
   background-color: gray;
 }
 
-/* clean overline for the compactification M-bar in labels */
-.ovl { text-decoration: overline; }
-
 /* tautological Chow ring layer */
 .taut-both        { background-color: #1a7f37; }
 .taut-open        { background-color: #6cc24a; }
 .taut-opencptfail { background-color: #9b59b6; }
 .taut-cptfail     { background-color: #e8a33d; }
 .taut-openfail    { background-color: #d64545; }
+
+/* clean overline for the compactification M-bar in labels */
+.ovl { text-decoration: overline; }
+
+/* polynomial point count layers */
+.pc-poly    { background-color: #1a7f37; }
+.pc-notpoly { background-color: #d64545; }
 
 td.cell.active {
   color: black;
