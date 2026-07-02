@@ -1,3 +1,8 @@
+/* keep the wide table's own scrollbar off the page body */
+.table-wrap {
+  overflow-x: auto;
+}
+
 table#mgnbar {
 }
 
