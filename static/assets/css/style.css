@@ -12,23 +12,15 @@ div#content pre {
 }
 
 #top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
   margin-bottom: .5rem;
 }
 
 #top #intro {
-  flex: 1 1 320px;
+  padding-right: 1rem;
 }
 
 #top #intro p {
   margin-bottom: .3rem;
-}
-
-#top #legend {
-  flex: 0 0 auto;
 }
 
 nav#menu {
