@@ -11,6 +11,26 @@ div#content pre {
   overflow-x: auto;
 }
 
+#top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+
+#top #intro {
+  flex: 1 1 320px;
+}
+
+#top #intro p {
+  margin-bottom: .3rem;
+}
+
+#top #legend {
+  flex: 0 0 auto;
+}
+
 nav#menu {
   font-size: 14px;
 }
