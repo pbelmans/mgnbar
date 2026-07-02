@@ -297,15 +297,24 @@ function selectProperty(id) {
   renderReferences(current);
 }
 
+// the selected layer lives in the URL hash (e.g. #tautological) so it is
+// bookmarkable and works with the browser back/forward buttons
+function applyHash() {
+  var id = decodeURIComponent(location.hash.slice(1));
+  if (!properties[id]) id = propertyOrder[0];
+  selectProperty(id);
+}
+
 $(function() {
   var group = $("#selector");
   propertyOrder.forEach(function(id) {
     $("<button type='button' class='btn btn-sm btn-outline-dark' data-prop='" + id + "'>"
       + properties[id].label + "</button>")
-      .on("click", function() { selectProperty(id); })
+      .on("click", function() { location.hash = id; })
       .appendTo(group);
   });
-  selectProperty("kodaira");
+  window.addEventListener("hashchange", applyHash);
+  applyHash();
 });
 </script>
 
