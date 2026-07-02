@@ -29,6 +29,7 @@ window.MathJax = {
   <script type="text/javascript" src="/assets/js/references.js"></script>
   <script type="text/javascript" src="/assets/js/tautological.js"></script>
   <script type="text/javascript" src="/assets/js/pointcount.js"></script>
+  <script type="text/javascript" src="/assets/js/rationality.js"></script>
   <script>var INITIAL_LAYER = "{{ .Params.layer | default "kodaira" }}";</script>
 
   <link href="/assets/css/style.css" rel="stylesheet">
@@ -113,7 +114,12 @@ var kodaira = {
   label: "Kodaira dimension",
   blurb: "The Kodaira dimension is a birational invariant, equal to &minus;&infin; or to an integer between 0 and the dimension, measuring how positive the canonical bundle is. A space of general type has Kodaira dimension equal to its dimension, while rational, unirational, and more generally uniruled spaces have Kodaira dimension &minus;&infin;.",
   references: references,
+  // the negative-Kodaira-dimension cells are refined by the rationality
+  // hierarchy (rational => unirational => uniruled), shown as shaded blues
   legend: [
+    { cls: "rat",          text: "rational" },
+    { cls: "unirat",       text: "unirational" },
+    { cls: "unirul",       text: "uniruled" },
     { cls: "negative",     text: "negative Kodaira dimension" },
     { cls: "general",      text: "general type" },
     { cls: "intermediate", text: "intermediate Kodaira dimension" },
@@ -140,11 +146,21 @@ var kodaira = {
     else if (kappa == top) dim = kappa + ", so it is of general type";
     else dim = kappa + ", and the dimension is " + top;
 
-    return {
-      cls: cls,
-      info: "The Kodaira dimension of " + Mopen(g, n) + " is " + dim,
-      refs: dimensions[g][n].references
-    };
+    var info = "The Kodaira dimension of " + Mopen(g, n) + " is " + dim;
+    var refs = dimensions[g][n].references.slice();
+    var label = null;
+
+    // overlay the rationality hierarchy on the κ = −∞ (blue) cells
+    var r = (kappa == -1) ? rationality[g + "," + n] : null;
+    if (r) {
+      var tier = { rational: "rat", unirational: "unirat", uniruled: "unirul" };
+      cls += " " + tier[r.lvl];
+      label = tier[r.lvl];
+      info += ", and " + Mopen(g, n) + " is " + r.lvl;
+      if (refs.indexOf(r.ref) < 0) refs.push(r.ref);
+    }
+
+    return { cls: cls, label: label, info: info, refs: refs };
   }
 };
 
@@ -322,9 +338,9 @@ function renderTable(prop) {
     row = $("<tr></tr>");
     row.append($("<th>" + n + "</th>"));
     for (var g = G_MIN; g <= G_MAX; g++) {
-      var cell = $("<td>●</td>").addClass("cell").data("g", g).data("n", n);
-      var cls = prop.classify(g, n).cls;
-      if (cls) cell.addClass(cls);
+      var c = prop.classify(g, n);
+      var cell = $("<td>" + (c.label || "●") + "</td>").addClass("cell").data("g", g).data("n", n);
+      if (c.cls) cell.addClass(c.cls);
       cell.on("click", cellClick(prop));
       row.append(cell);
     }

@@ -32,8 +32,22 @@ td.cell:hover {
   opacity: 0.5;
 }
 
+/* negative Kodaira dimension, refined by the rationality hierarchy:
+   rational (darkest) -> unirational -> uniruled -> only κ = −∞ (lightest) */
 .negative {
-  background-color: #007bff;
+  background-color: #9ecae1;
+}
+.rat    { background-color: #08306b; }
+.unirat { background-color: #08519c; }
+.unirul { background-color: #2171b5; }
+
+/* the rationality tiers carry a short white label inside the cell */
+td.cell.rat,
+td.cell.unirat,
+td.cell.unirul {
+  color: #fff;
+  font-size: 55%;
+  letter-spacing: -0.2px;
 }
 
 .general {
