@@ -50,8 +50,9 @@ td.cell .rlbl {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 55%;
-  letter-spacing: -0.2px;
+  font-size: 9px;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
   pointer-events: none;
 }
 
