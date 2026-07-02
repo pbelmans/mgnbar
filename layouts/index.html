@@ -92,135 +92,151 @@ for (key in references) {
 </script>
 
 <script>
-// main script
-$(function() {
-  // hide the specific information paragraph
-  $("p#information").css("visibility", "hidden");
-  // creating the table
-  var table = $("table#mgnbar");
+// helpers for typesetting the moduli space in labels (no MathJax needed)
+function Mopen(g, n) { return "M<sub>" + g + "," + n + "</sub>"; }
+function Mbar(g, n)  { return "M̄<sub>" + g + "," + n + "</sub>"; }
 
-  // header row
+// A "property" describes one invariant displayed on the (g,n) table:
+//   label       button caption
+//   references  reference dictionary shown below the table
+//   legend      [{cls, text}] rows explaining the colours
+//   classify(g,n) -> {cls, info, refs}
+//     cls   css class colouring the cell (empty = nothing known)
+//     info  html shown above the table when the cell is selected
+//     refs  keys of references relevant to this cell
+var kodaira = {
+  label: "Kodaira dimension",
+  references: references,
+  legend: [
+    { cls: "negative",     text: "negative Kodaira dimension" },
+    { cls: "general",      text: "general type" },
+    { cls: "intermediate", text: "intermediate Kodaira dimension" },
+    { cls: "range",        text: "some bounds exist" },
+    { cls: "",             text: "nothing known" }
+  ],
+  classify: function(g, n) {
+    var kappa = dimensions[g][n].kappa;
+    var top = 3*g - 3 + n;
+    var cls = "";
+    if (kappa == -1) cls = "negative";
+    else if (kappa == top) cls = "general";
+    else if (0 <= kappa && kappa < top) cls = "intermediate";
+    else if (kappa.length < top + 2) cls = "range";
+
+    var dim;
+    if (Array.isArray(kappa)) {
+      var lower = Math.min(...kappa), upper = Math.max(...kappa);
+      if (lower == -1) dim = "≤" + upper;
+      else if (upper == top) dim = "≥" + lower;
+      else dim = "∈[" + lower + "," + upper + "]";
+    }
+    else if (kappa == -1) dim = "-&infin;";
+    else if (kappa == top) dim = kappa + ", so it is of general type";
+    else dim = kappa + ", and the dimension is " + top;
+
+    return {
+      cls: cls,
+      info: "The Kodaira dimension of " + Mopen(g, n) + " is " + dim,
+      refs: dimensions[g][n].references
+    };
+  }
+};
+
+// registry of available properties; propertyOrder fixes the button order
+var properties = { kodaira: kodaira };
+var propertyOrder = ["kodaira"];
+var current = null;
+
+function renderReferences(prop) {
+  var list = $("ul#references").empty();
+  $("span#specifier").html("");
+  for (var key in prop.references) {
+    var reference = prop.references[key];
+    var entry = reference.author + ", <em>" + reference.title + "</em>"
+              + " (<strong>" + reference.year + "</strong>)";
+    if ("journal" in reference) entry += ", " + reference.journal;
+    if ("pages" in reference)   entry += ", " + reference.pages[0] + "–" + reference.pages[1];
+    if (key.startsWith("MR"))
+      entry += " [<a href='https://mathscinet.ams.org/mathscinet-getitem?mr=" + key + "'>" + key + "</a>]";
+    if (/^\d{4}/.test(key))
+      entry += " [<a href='https://arxiv.org/abs/" + key + "'>" + key + "</a>]";
+    list.append($("<li data-key='" + key + "'>" + entry + "</li>"));
+  }
+}
+
+function renderLegend(prop) {
+  var legend = $("div#legend").empty();
+  prop.legend.forEach(function(r) {
+    legend.append($("<p class='m-0'><span class='" + r.cls + "'></span> " + r.text + "</p>"));
+  });
+}
+
+function cellClick(prop) {
+  return function() {
+    var g = $(this).data("g"), n = $(this).data("n");
+    if ($(this).hasClass("active")) {
+      $("ul#references li").show();
+      $("span#specifier").html("");
+      $("p#information").css("visibility", "hidden");
+      $(this).removeClass("active");
+      return;
+    }
+    $("td.cell").removeClass("active");
+    $(this).addClass("active");
+    $("p#none").remove();
+
+    var c = prop.classify(g, n);
+    $("p#information").css("visibility", "visible").html(c.info);
+
+    $("ul#references li").hide();
+    if (c.refs && c.refs.length > 0)
+      for (const key of c.refs) $("li[data-key~='" + key + "']").show();
+    else
+      $("ul#references").append($("<p id='none'>no references available</p>"));
+    $("span#specifier").html(" for " + Mopen(g, n));
+  };
+}
+
+function renderTable(prop) {
+  var table = $("table#mgnbar").empty();
+
   var row = $("<tr><td style='font-size: 125%'>ₙ\\ᵍ</td></tr>");
-  for (g = G_MIN; g <= G_MAX; g++)
-    row.append($("<th>" + g + "</th>"));
+  for (var g = G_MIN; g <= G_MAX; g++) row.append($("<th>" + g + "</th>"));
   table.append(row);
 
-  // main body of the table
   for (var n = N_MIN; n <= N_MAX; n++) {
     row = $("<tr></tr>");
     row.append($("<th>" + n + "</th>"));
-
     for (var g = G_MIN; g <= G_MAX; g++) {
-      var cell = $("<td>●</td>")
-        .addClass("cell")
-        .data("g", g)
-        .data("n", n)
-
-      // decide on the styling of a cell
-      if (dimensions[g][n].kappa == -1)
-        cell.addClass("negative");
-      else if (dimensions[g][n].kappa == 3*g - 3 + n)
-        cell.addClass("general");
-      else if (0 <= dimensions[g][n].kappa && dimensions[g][n].kappa < 3*g - 3 + n)
-        cell.addClass("intermediate");
-      else if (dimensions[g][n].kappa.length < 3*g - 3 + n + 2)
-        cell.addClass("range");
-
-      // add interactivity to cell
-      cell.on("click", function() {
-        var g = $(this).data("g");
-        var n = $(this).data("n");
-        var keys = dimensions[g][n].references;
-
-        // if active then we return to the initial state
-        if ($(this).hasClass("active")) {
-          // show all references
-          $("ul#references li").show();
-          // clear specifier
-          $("span#specifier").html("");
-
-          // make it inactive
-          $(this).removeClass("active");
-        }
-        // if not active we change the view to have only the specific data for this (g,n)
-        else {
-          // remove all active classes from other cells
-          $("td.cell").removeClass("active");
-          // make the current cell active
-          $(this).addClass("active");
-
-          // remove the "no references apply" message
-          $("p#none").remove();
-
-          // update the information display
-          $("p#information").css("visibility", "visible");
-          $("span#moduli").html("M<sub>" + g + "," + n + "</sub>");
-
-          // deal with the different scenarios for the Kodaira dimension
-          // if it is a range we have certain bounds
-          if (Array.isArray(dimensions[g][n].kappa)) {
-            // standing assumption: range is always continuous
-            // so figure out upper and lower bound
-            var lower = Math.min(...dimensions[g][n].kappa);
-            var upper = Math.max(...dimensions[g][n].kappa);
-
-            if (lower == -1) $("span#dimension").html("≤" + upper);
-            else if (upper == 3*g - 3 + n) $("span#dimension").html("≥" + lower);
-            else $("span#dimension").html("∈[" + lower + "," + upper + "]");
-          }
-          else if (dimensions[g][n].kappa == -1)
-            $("span#dimension").html("-&infin;");
-          else if (dimensions[g][n].kappa == 3*g - 3 + n)
-            $("span#dimension").html(dimensions[g][n].kappa + ", so it is of general type");
-          else
-            $("span#dimension").html(dimensions[g][n].kappa + ", and the dimension is " + (3*g - 3 + n));
-
-          // show the references for this specific result only
-          $("ul#references li").hide();
-          // if there are results we make these visible again
-          if (keys.length > 0)
-            for (const key of keys) $("li[data-key~='" + key + "']").show();
-          else
-            $("ul#references").append($("<p id='none'>no references available</p>"));
-
-          $("span#specifier").html(" for M<sub>" + g + "," + n + "</sub>");
-        }
-      });
-
+      var cell = $("<td>●</td>").addClass("cell").data("g", g).data("n", n);
+      var cls = prop.classify(g, n).cls;
+      if (cls) cell.addClass(cls);
+      cell.on("click", cellClick(prop));
       row.append(cell);
     }
-
     table.append(row);
   }
+}
 
-  // adding the references
-  var list = $("ul#references");
+function selectProperty(id) {
+  current = properties[id];
+  $("#selector button").removeClass("active");
+  $("#selector button[data-prop='" + id + "']").addClass("active");
+  $("p#information").css("visibility", "hidden");
+  renderTable(current);
+  renderLegend(current);
+  renderReferences(current);
+}
 
-  for (key in references) {
-    var reference = references[key];
-
-    // ugly string builder for references
-    var entry = "";
-    entry += reference.author;
-    entry += ", <em>" + reference.title + "</em>";
-    entry += " (<strong>" + reference.year + "</strong>)";
-    if ("journal" in reference)
-      entry += ", " + reference.journal;
-    if ("pages" in reference)
-      entry += ", " + reference.pages[0] + "–" + reference.pages[1];
-
-    // MathScinet link from key
-    if (key.startsWith("MR"))
-      entry += " [<a href='https://mathscinet.ams.org/mathscinet-getitem?mr=" + key + "'>" + key + "</a>]";
-    // arXiv link from key
-    const arxiv = new RegExp('^\\d{4}');
-    if (arxiv.test(key))
-      entry += "[<a href='https://arxiv.org/abs/" + key + "'>" + key + "</a>]";
-
-    var item = $("<li data-key='" + key + "'>" + entry + "</li>")
-
-    list.append(item);
-  }
+$(function() {
+  var group = $("#selector");
+  propertyOrder.forEach(function(id) {
+    $("<button type='button' class='btn btn-sm btn-outline-dark' data-prop='" + id + "'>"
+      + properties[id].label + "</button>")
+      .on("click", function() { selectProperty(id); })
+      .appendTo(group);
+  });
+  selectProperty("kodaira");
 });
 </script>
 
@@ -231,21 +247,11 @@ $(function() {
 {{ partial "header.html" . }}
 
 <div id="content" class="container">
-  <div class="row">
-    <p class="col" id="information">
-      The Kodaira dimension of
-      <span id="moduli">M<sub><i>g,n</i></sub></span>
-      is
-      <span id="dimension">?</span>
-    </p>
+  <div id="selector" class="btn-group flex-wrap mb-2" role="group"></div>
 
-    <div class="col" id="legend">
-      <p class="m-0"><span class="negative"></span> negative Kodaira dimension
-      <p class="m-0"><span class="general"></span> general type
-      <p class="m-0"><span class="intermediate"></span> intermediate Kodaira dimension
-      <p class="m-0"><span class="range"></span> some bounds exist
-      <p class="m-0"><span></span> nothing known
-    </div>
+  <div class="row">
+    <p class="col" id="information">?</p>
+    <div class="col" id="legend"></div>
   </div>
 
   <table id="mgnbar"></table>
