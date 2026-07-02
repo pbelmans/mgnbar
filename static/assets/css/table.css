@@ -43,6 +43,9 @@ td.cell:hover {
   background-color: gray;
 }
 
+/* clean overline for the compactification M-bar in labels */
+.ovl { text-decoration: overline; }
+
 /* tautological Chow ring layer */
 .taut-both        { background-color: #1a7f37; }
 .taut-open        { background-color: #6cc24a; }

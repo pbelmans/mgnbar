@@ -94,8 +94,9 @@ for (key in references) {
 
 <script>
 // helpers for typesetting the moduli space in labels (no MathJax needed)
+var MBAR = "<span class=\"ovl\">M</span>";      // M with a clean overline
 function Mopen(g, n) { return "M<sub>" + g + "," + n + "</sub>"; }
-function Mbar(g, n)  { return "M̄<sub>" + g + "," + n + "</sub>"; }
+function Mbar(g, n)  { return MBAR + "<sub>" + g + "," + n + "</sub>"; }
 
 // A "property" describes one invariant displayed on the (g,n) table:
 //   label       button caption
@@ -163,10 +164,10 @@ var tautologicalProp = {
   label: "Tautological ring",
   references: tautologicalReferences,
   legend: [
-    { cls: "taut-both",        text: "A*(M̄<sub>g,n</sub>) tautological" },
+    { cls: "taut-both",        text: "A*(" + MBAR + "<sub>g,n</sub>) tautological" },
     { cls: "taut-open",        text: "A*(M<sub>g,n</sub>) tautological" },
-    { cls: "taut-opencptfail", text: "A*(M<sub>g,n</sub>) tautological, A*(M̄<sub>g,n</sub>) not" },
-    { cls: "taut-cptfail",     text: "A*(M̄<sub>g,n</sub>) not tautological" },
+    { cls: "taut-opencptfail", text: "A*(M<sub>g,n</sub>) tautological, A*(" + MBAR + "<sub>g,n</sub>) not" },
+    { cls: "taut-cptfail",     text: "A*(" + MBAR + "<sub>g,n</sub>) not tautological" },
     { cls: "taut-openfail",    text: "A*(M<sub>g,n</sub>) not tautological" },
     { cls: "",                 text: "nothing known" }
   ],
