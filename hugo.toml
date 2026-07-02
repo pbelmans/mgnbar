@@ -1,0 +1,4 @@
+baseURL = "https://mgnbar.info/"
+title = "the geometry of M_{g,n}"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+enableGitInfo = false

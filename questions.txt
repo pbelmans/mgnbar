@@ -1,0 +1,2 @@
+* what is kappa(M_{1,n}) for n<=10? https://mathscinet.ams.org/mathscinet-getitem?mr=2216264 only writes it for n>=11
+* 
