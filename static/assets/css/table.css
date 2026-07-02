@@ -53,9 +53,11 @@ td.cell:hover {
 /* clean overline for the compactification M-bar in labels */
 .ovl { text-decoration: overline; }
 
-/* polynomial point count layers */
-.pc-poly    { background-color: #1a7f37; }
-.pc-notpoly { background-color: #d64545; }
+/* polynomial point count overview */
+.pc-both    { background-color: #1a7f37; }
+.pc-cpt     { background-color: #17a2b8; }
+.pc-open    { background-color: #6cc24a; }
+.pc-neither { background-color: #d64545; }
 
 td.cell.active {
   color: black;

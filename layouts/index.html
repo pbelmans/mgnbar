@@ -180,37 +180,40 @@ var tautologicalProp = {
 };
 
 // whether point counts over finite fields are polynomial in q; the two charts
-// from Section 5 of Larson's survey, arXiv:2606.29656, shown as two layers.
-function pointcountLayer(label, space, data) {
-  var name = "#" + space + "<sub>g,n</sub>(F<sub>q</sub>)";
-  return {
-    label: label,
-    references: tautologicalReferences,
-    legend: [
-      { cls: "pc-poly",    text: name + " polynomial in q" },
-      { cls: "pc-notpoly", text: name + " not polynomial in q" },
-      { cls: "",           text: "nothing known" }
-    ],
-    classify: function(g, n) {
-      var s = data[g + "," + n];
-      if (!s) return { cls: "", info: "", refs: [] };
-      var count = "#" + (space === "M" ? Mopen(g, n) : Mbar(g, n)) + "(F<sub>q</sub>)";
-      var info = count + " is " + (s === "poly" ? "" : "not ") + "a polynomial in q";
-      return { cls: "pc-" + s, info: info, refs: ["2606.29656"] };
-    }
-  };
-}
-var pcMbarProp = pointcountLayer("Point count of " + MBAR, MBAR, pointcountMbar);
-var pcMProp    = pointcountLayer("Point count of M", "M", pointcountM);
+// from Section 5 of Larson's survey, arXiv:2606.29656, merged into one overview.
+// Each cell value is "<Mbar><M>" with statuses p (polynomial), n (not), u (unknown).
+var pointcountPhrase = { p: "polynomial in q", n: "not polynomial in q", u: "not known" };
+var pointcountProp = {
+  label: "Point count",
+  references: tautologicalReferences,
+  legend: [
+    { cls: "pc-both",    text: "#" + MBAR + "<sub>g,n</sub> and #M<sub>g,n</sub> polynomial" },
+    { cls: "pc-cpt",     text: "only #" + MBAR + "<sub>g,n</sub> polynomial" },
+    { cls: "pc-open",    text: "only #M<sub>g,n</sub> polynomial" },
+    { cls: "pc-neither", text: "point count not polynomial" },
+    { cls: "",           text: "nothing known" }
+  ],
+  classify: function(g, n) {
+    var v = pointcount[g + "," + n];
+    if (!v) return { cls: "", info: "", refs: [] };
+    var b = v[0], m = v[1], cls;
+    if (b === "p" && m === "p") cls = "pc-both";
+    else if (b === "p")         cls = "pc-cpt";
+    else if (m === "p")         cls = "pc-open";
+    else                        cls = "pc-neither";
+    var info = "#" + Mbar(g, n) + "(F<sub>q</sub>) is " + pointcountPhrase[b]
+             + "; #" + Mopen(g, n) + "(F<sub>q</sub>) is " + pointcountPhrase[m];
+    return { cls: cls, info: info, refs: ["2606.29656"] };
+  }
+};
 
 // registry of available properties; propertyOrder fixes the button order
 var properties = {
   kodaira: kodaira,
   tautological: tautologicalProp,
-  pointcountMbar: pcMbarProp,
-  pointcountM: pcMProp
+  pointcount: pointcountProp
 };
-var propertyOrder = ["kodaira", "tautological", "pointcountMbar", "pointcountM"];
+var propertyOrder = ["kodaira", "tautological", "pointcount"];
 var current = null;
 
 function renderReferences(prop) {
