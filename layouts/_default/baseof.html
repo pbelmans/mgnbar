@@ -112,13 +112,15 @@ function Mbar(g, n)  { return MBAR + "<sub>" + g + "," + n + "</sub>"; }
 //     refs  keys of references relevant to this cell
 var kodaira = {
   label: "Kodaira dimension",
-  blurb: "The Kodaira dimension is a birational invariant, equal to &minus;&infin; or to an integer between 0 and the dimension, measuring how positive the canonical bundle is. A space of general type has Kodaira dimension equal to its dimension, while rational, unirational, and more generally uniruled spaces have Kodaira dimension &minus;&infin;.",
+  blurb: "The Kodaira dimension is a birational invariant, equal to &minus;&infin; or to an integer between 0 and the dimension, measuring how positive the canonical bundle is. A space of general type has Kodaira dimension equal to its dimension, while rational, unirational, rationally connected, and more generally uniruled spaces have Kodaira dimension &minus;&infin;.",
   references: references,
   // the negative-Kodaira-dimension cells are refined by the rationality
-  // hierarchy (rational => unirational => uniruled), shown as shaded blues
+  // hierarchy (rational => unirational => rationally connected => uniruled),
+  // shown as shaded blues
   legend: [
     { cls: "rat",          text: "rational" },
     { cls: "unirat",       text: "unirational" },
+    { cls: "ratconn",      text: "rationally connected" },
     { cls: "unirul",       text: "uniruled" },
     { cls: "negative",     text: "negative Kodaira dimension" },
     { cls: "general",      text: "general type" },
@@ -153,7 +155,7 @@ var kodaira = {
     // overlay the rationality hierarchy on the κ = −∞ (blue) cells
     var r = (kappa == -1) ? rationality[g + "," + n] : null;
     if (r) {
-      var tier = { rational: "rat", unirational: "unirat", uniruled: "unirul" };
+      var tier = { rational: "rat", unirational: "unirat", "rationally connected": "ratconn", uniruled: "unirul" };
       cls += " " + tier[r.lvl];
       label = tier[r.lvl];
       info += ", and " + Mopen(g, n) + " is " + r.lvl;

@@ -33,14 +33,16 @@ td.cell:hover {
   opacity: 0.5;
 }
 
-/* negative Kodaira dimension, refined by the rationality hierarchy:
-   rational (darkest) -> unirational -> uniruled -> only κ = −∞ (lightest) */
+/* negative Kodaira dimension, refined by the rationality hierarchy: rational
+   (darkest) -> unirational -> rationally connected -> uniruled -> only
+   κ = −∞ (lightest) */
 .negative {
   background-color: #9ecae1;
 }
-.rat    { background-color: #08306b; }
-.unirat { background-color: #08519c; }
-.unirul { background-color: #2171b5; }
+.rat     { background-color: #08306b; }
+.unirat  { background-color: #08519c; }
+.ratconn { background-color: #1461a8; }
+.unirul  { background-color: #2171b5; }
 
 /* the rationality label sits behind the ● marker, filling the cell */
 td.cell .rlbl {
