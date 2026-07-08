@@ -303,30 +303,58 @@ function renderLegend(prop) {
   });
 }
 
+// show the selected cell's info and filter the references to the relevant ones
+function showCell($cell, prop) {
+  var g = $cell.data("g"), n = $cell.data("n");
+  $("td.cell").removeClass("active");
+  $cell.addClass("active");
+  $("p#none").remove();
+
+  var c = prop.classify(g, n);
+  $("p#information").css("visibility", "visible").html(c.info);
+
+  $("ul#references li").hide();
+  if (c.refs && c.refs.length > 0)
+    for (const key of c.refs) $("li[data-key~='" + key + "']").show();
+  else
+    $("ul#references").append($("<p id='none'>no references available</p>"));
+  $("span#specifier").html(" for " + Mopen(g, n));
+}
+
+function clearCell() {
+  $("td.cell").removeClass("active");
+  $("ul#references li").show();
+  $("span#specifier").html("");
+  $("p#information").css("visibility", "hidden");
+  $("p#none").remove();
+}
+
 function cellClick(prop) {
   return function() {
-    var g = $(this).data("g"), n = $(this).data("n");
     if ($(this).hasClass("active")) {
-      $("ul#references li").show();
-      $("span#specifier").html("");
-      $("p#information").css("visibility", "hidden");
-      $(this).removeClass("active");
+      clearCell();
+      // drop the #g,n but keep the layer path
+      history.replaceState(null, "", location.pathname);
       return;
     }
-    $("td.cell").removeClass("active");
-    $(this).addClass("active");
-    $("p#none").remove();
-
-    var c = prop.classify(g, n);
-    $("p#information").css("visibility", "visible").html(c.info);
-
-    $("ul#references li").hide();
-    if (c.refs && c.refs.length > 0)
-      for (const key of c.refs) $("li[data-key~='" + key + "']").show();
-    else
-      $("ul#references").append($("<p id='none'>no references available</p>"));
-    $("span#specifier").html(" for " + Mopen(g, n));
+    showCell($(this), prop);
+    var g = $(this).data("g"), n = $(this).data("n");
+    // link straight to this cell, e.g. /tautological/#9,4
+    history.replaceState(null, "", location.pathname + "#" + g + "," + n);
   };
+}
+
+// select the cell named in the URL hash (#g,n), if any, and scroll it into view
+function selectCellFromHash(prop) {
+  var m = location.hash.match(/^#(\d+),(\d+)$/);
+  if (!m) return;
+  var g = +m[1], n = +m[2];
+  var $cell = $("td.cell").filter(function() {
+    return $(this).data("g") === g && $(this).data("n") === n;
+  });
+  if (!$cell.length) return;
+  showCell($cell, prop);
+  $cell[0].scrollIntoView({ block: "nearest", inline: "center" });
 }
 
 function renderTable(prop) {
@@ -391,6 +419,7 @@ $(function() {
   var initial = (typeof INITIAL_LAYER !== "undefined" && properties[INITIAL_LAYER])
     ? INITIAL_LAYER : layerFromPath(location.pathname);
   selectProperty(initial);
+  selectCellFromHash(current);
 });
 </script>
 
