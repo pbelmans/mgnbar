@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this website, please cite it as below."
+type: dataset
+title: "Mgnbar.info: the geometry of the moduli space of curves"
+abstract: >-
+  An interactive table on the geometry of the moduli space of stable n-pointed
+  genus g curves: Kodaira dimension, tautological generation of the Chow ring,
+  and polynomiality of point counts over finite fields, with references.
+authors:
+  - family-names: Barros
+    given-names: Ignacio
+    affiliation: "University of Antwerp"
+    orcid: "https://orcid.org/0000-0002-7729-9413"
+  - family-names: Belmans
+    given-names: Pieter
+    affiliation: "Utrecht University"
+    orcid: "https://orcid.org/0000-0002-0140-2824"
+url: "https://mgnbar.info"
+repository-code: "https://github.com/pbelmans/mgnbar"
+license: CC-BY-4.0
+version: 1.0.0
+date-released: "2026-07-10"
+keywords:
+  - moduli of curves
+  - Kodaira dimension
+  - tautological ring
+  - algebraic geometry
