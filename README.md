@@ -25,6 +25,22 @@ Please use [GitHub issues](https://github.com/pbelmans/mgnbar/issues)
 to suggest information you want to see displayed, or get in touch with
 one of us through the contact information below.
 
+## How to cite
+
+The website is archived on Zenodo. To cite the version-independent latest
+release, use the concept DOI
+[10.5281/zenodo.21296960](https://doi.org/10.5281/zenodo.21296960).
+
+```bibtex
+@online{mgnbar,
+  author = {Barros, Ignacio and Belmans, Pieter},
+  title  = {Mgnbar.info: the geometry of the moduli space of curves},
+  url    = {https://mgnbar.info},
+  doi    = {10.5281/zenodo.21296960},
+  year   = {2026},
+}
+```
+
 ## You may also like
 
 * [fanography.info](https://www.fanography.info)
