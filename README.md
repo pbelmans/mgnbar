@@ -1,5 +1,7 @@
 # [mgnbar.info](https://mgnbar.info)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21296960.svg)](https://doi.org/10.5281/zenodo.21296960)
+
 This is the repository for a website on the moduli space of stable marked
 curves $\overline{\mathrm{M}}_{g,n}$, and its beautiful geometric properties.
 
