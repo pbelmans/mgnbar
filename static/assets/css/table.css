@@ -86,6 +86,10 @@ td.cell .rlbl {
 .pc-open    { background-color: #6cc24a; }
 .pc-neither { background-color: #d64545; }
 
+/* Gorenstein property of the tautological cohomology ring */
+.gor-yes { background-color: #1a7f37; }
+.gor-no  { background-color: #d64545; }
+
 td.cell.active {
   color: black;
 }

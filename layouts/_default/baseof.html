@@ -29,6 +29,7 @@ window.MathJax = {
   <script type="text/javascript" src="/assets/js/references.js"></script>
   <script type="text/javascript" src="/assets/js/tautological.js"></script>
   <script type="text/javascript" src="/assets/js/pointcount.js"></script>
+  <script type="text/javascript" src="/assets/js/gorenstein.js"></script>
   <script type="text/javascript" src="/assets/js/rationality.js"></script>
   <script>var INITIAL_LAYER = "{{ .Params.layer | default "kodaira" }}";</script>
 
@@ -263,13 +264,71 @@ var pointcountProp = {
   }
 };
 
+// whether the tautological cohomology ring of Mbar_{g,n} is Gorenstein;
+// positive and negative regions are from arXiv:2406.10516.
+var gorensteinReferences = {
+  "MR3178432": {
+    author: "Petersen, Dan",
+    title: "The structure of the tautological ring in genus one",
+    year: 2014,
+    journal: "Duke Math. J. 163, no. 4, 777–793"
+  },
+  "MR3179574": {
+    author: "Petersen, Dan and Tommasi, Orsola",
+    title: "The Gorenstein conjecture fails for the tautological ring of $\\overline{\\mathcal{M}}_{2,n}$",
+    year: 2014,
+    journal: "Invent. Math. 196, no. 1, 139–161"
+  },
+  "MR3530445": {
+    author: "Petersen, Dan",
+    title: "Tautological rings of spaces of pointed genus two curves of compact type",
+    year: 2016,
+    journal: "Compos. Math. 152, no. 7, 1398–1420"
+  },
+  "2406.10516": {
+    author: "Canning, Samir",
+    title: "The tautological ring of $\\overline{\\mathcal{M}}_{g,n}$ is rarely Gorenstein",
+    year: 2024
+  }
+};
+var RH = "RH<sup>*</sup>";
+var gorensteinProp = {
+  label: "Gorenstein property",
+  blurb: "The tautological cohomology ring has the Gorenstein property when its top-degree intersection pairings are perfect. In that case, a tautological class vanishes exactly when it pairs trivially with every tautological class of complementary degree.",
+  references: gorensteinReferences,
+  specifier: Mbar,
+  legend: [
+    { cls: "gor-yes", text: RH + "(" + MBAR + "<sub>g,n</sub>) Gorenstein" },
+    { cls: "gor-no", text: RH + "(" + MBAR + "<sub>g,n</sub>) not Gorenstein" },
+    { cls: "", text: "unknown" }
+  ],
+  classify: function(g, n) {
+    var state = gorenstein[g + "," + n];
+    if (!state) return { cls: "", info: "", refs: [] };
+
+    var subject = RH + "(" + Mbar(g, n) + ")";
+    if (state === "unknown")
+      return { cls: "", info: "Whether " + subject + " is Gorenstein is not known", refs: ["2406.10516"] };
+
+    var refs = ["2406.10516"];
+    if (g === 1) refs.unshift("MR3178432");
+    if (g === 2) refs.unshift("MR3179574", "MR3530445");
+    return {
+      cls: "gor-" + state,
+      info: subject + (state === "yes" ? " is Gorenstein" : " is not Gorenstein"),
+      refs: refs
+    };
+  }
+};
+
 // registry of available properties; propertyOrder fixes the button order
 var properties = {
   kodaira: kodaira,
   tautological: tautologicalProp,
-  pointcount: pointcountProp
+  pointcount: pointcountProp,
+  gorenstein: gorensteinProp
 };
-var propertyOrder = ["kodaira", "tautological", "pointcount"];
+var propertyOrder = ["kodaira", "tautological", "pointcount", "gorenstein"];
 var current = null;
 
 // (re-)typeset any math in the reference titles after they are rebuilt
@@ -318,7 +377,7 @@ function showCell($cell, prop) {
     for (const key of c.refs) $("li[data-key~='" + key + "']").show();
   else
     $("ul#references").append($("<p id='none'>no references available</p>"));
-  $("span#specifier").html(" for " + Mopen(g, n));
+  $("span#specifier").html(" for " + (prop.specifier || Mopen)(g, n));
 }
 
 function clearCell() {
@@ -393,7 +452,12 @@ function selectProperty(id) {
 
 // each layer has its own real URL, so selecting one updates the address bar
 // (via the History API) and the browser back/forward buttons work
-var layerPath = { kodaira: "/", tautological: "/tautological/", pointcount: "/point-count/" };
+var layerPath = {
+  kodaira: "/",
+  tautological: "/tautological/",
+  pointcount: "/point-count/",
+  gorenstein: "/gorenstein/"
+};
 function layerFromPath(p) {
   for (var id in layerPath)
     if (layerPath[id] === p || layerPath[id] === p + "/") return id;
