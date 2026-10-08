@@ -406,15 +406,6 @@ references = {
       [23, 0, 23*3 - 3]
     ]
   },
-  "2008.08852" : {
-    "author" : "Farkas, Gavril and Verra, Alessandro",
-    "title" : "On the Kodaira dimension of the moduli space of curves of genus 16",
-    "year" : 2020,
-
-    "dimensions" : [
-      [16, 0, "<=44"]
-    ]
-  },
   "MR4718128" : {
     "author" : "Farkas, Gavril and Jensen, David and Payne, Sam",
     "title" : "The non-abelian Brill-Noether divisor on $\\overline{\\mathcal{M}}_{13}$ and the Kodaira dimension of $\\overline{\\mathcal{R}}_{13}$",
@@ -471,5 +462,4 @@ references = {
     ]
   },
 };
-
 
