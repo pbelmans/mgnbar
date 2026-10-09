@@ -461,5 +461,14 @@ references = {
       [13, 3, -1]
     ]
   },
-};
+  "2610.12364" : {
+    "author" : "Farkas, Gavril and Verra, Alessandro",
+    "title" : "The moduli space of curves of genus 16 is uniruled",
+    "year" : 2026,
 
+    "dimensions" : [
+      // Theorem 1: uniruledness
+      [16, 0, -1]
+    ]
+  },
+};
